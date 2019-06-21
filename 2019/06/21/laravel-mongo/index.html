@@ -7,17 +7,17 @@
   
   <title>laravel &amp; mongo | Martin Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="标题一标题二标题三这是加粗 这是斜体 这是横线  无序列表 无序列表   有序列表 有序列表  内嵌代码  1代码块   引用">
+  <meta name="description" content="在 Laravel 中使用 MongoDB安装  推荐组件 1composer require jenssegers/mongodb  修改数据库配置文件 config/database.php 中 123456789添加 MongoDB 的数据库的信息:&amp;apos;mongodb&amp;apos; =&amp;gt; [            &amp;apos;driver&amp;apos;   =&amp;gt; &amp;apos;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="laravel &amp; mongo">
 <meta property="og:url" content="https://wubuze.github.io/2019/06/21/laravel-mongo/index.html">
 <meta property="og:site_name" content="Martin Blog">
-<meta property="og:description" content="标题一标题二标题三这是加粗 这是斜体 这是横线  无序列表 无序列表   有序列表 有序列表  内嵌代码  1代码块   引用">
+<meta property="og:description" content="在 Laravel 中使用 MongoDB安装  推荐组件 1composer require jenssegers/mongodb  修改数据库配置文件 config/database.php 中 123456789添加 MongoDB 的数据库的信息:&amp;apos;mongodb&amp;apos; =&amp;gt; [            &amp;apos;driver&amp;apos;   =&amp;gt; &amp;apos;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-21T03:25:41.354Z">
+<meta property="og:updated_time" content="2019-06-21T05:34:18.427Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="laravel &amp; mongo">
-<meta name="twitter:description" content="标题一标题二标题三这是加粗 这是斜体 这是横线  无序列表 无序列表   有序列表 有序列表  内嵌代码  1代码块   引用">
+<meta name="twitter:description" content="在 Laravel 中使用 MongoDB安装  推荐组件 1composer require jenssegers/mongodb  修改数据库配置文件 config/database.php 中 123456789添加 MongoDB 的数据库的信息:&amp;apos;mongodb&amp;apos; =&amp;gt; [            &amp;apos;driver&amp;apos;   =&amp;gt; &amp;apos;">
   
     <link rel="alternate" href="/atom.xml" title="Martin Blog" type="application/atom+xml">
   
@@ -86,44 +86,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="标题一"><a href="#标题一" class="headerlink" title="标题一"></a>标题一</h1><h2 id="标题二"><a href="#标题二" class="headerlink" title="标题二"></a>标题二</h2><h3 id="标题三"><a href="#标题三" class="headerlink" title="标题三"></a>标题三</h3><p><strong>这是加粗</strong></p>
-<p><em>这是斜体</em></p>
-<p><del>这是横线</del></p>
+        <h1 id="在-Laravel-中使用-MongoDB"><a href="#在-Laravel-中使用-MongoDB" class="headerlink" title="在 Laravel 中使用 MongoDB"></a>在 Laravel 中使用 MongoDB</h1><p><strong>安装</strong></p>
 <ul>
-<li>无序列表</li>
-<li>无序列表</li>
+<li><p>推荐组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require jenssegers/mongodb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改数据库配置文件 config/database.php 中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">添加 MongoDB 的数据库的信息:</span><br><span class="line">&apos;mongodb&apos; =&gt; [    </span><br><span class="line">        &apos;driver&apos;   =&gt; &apos;mongodb&apos;,    </span><br><span class="line">        &apos;host&apos;     =&gt; &apos;localhost&apos;,    </span><br><span class="line">        &apos;port&apos;     =&gt; 27017,    </span><br><span class="line">        &apos;database&apos; =&gt; env(&apos;DB_CONNECTION&apos;, &apos;mongodb&apos;),    </span><br><span class="line">        &apos;username&apos; =&gt; &apos;&apos;,    </span><br><span class="line">        &apos;password&apos; =&gt; &apos;&apos;,</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
-<ol>
-<li>有序列表</li>
-<li>有序列表</li>
-</ol>
-<p><code>内嵌代码</code> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">代码块</span><br></pre></td></tr></table></figure>
+<p><strong>使用</strong></p>
+<ul>
+<li>新增迁移</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">use Jenssegers\Mongodb\Schema\Blueprint;</span><br><span class="line">public function up()</span><br><span class="line">&#123;</span><br><span class="line">    Schema::connection(&apos;mongo&apos;)-&gt;create(&apos;product&apos;, function (Blueprint $collection) &#123;</span><br><span class="line">        $collection-&gt;string(&apos;name&apos;);</span><br><span class="line">        $collection-&gt;string(&apos;mfn&apos;)-&gt;unique();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>引用</p>
-</blockquote>
-
+<ul>
+<li>model </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Jenssegers\Mongodb\Eloquent\Model</span><br><span class="line"></span><br><span class="line">class MongoModel extends Model</span><br><span class="line">&#123;</span><br><span class="line">    protected $connection = &apos;mongo&apos;;</span><br><span class="line"></span><br><span class="line">    protected $collection = &apos;product&apos;;</span><br><span class="line"></span><br><span class="line">    public $timestamps = false;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wubuze.github.io/2019/06/21/laravel-mongo/" data-id="cjx5j9d550001t43w781zegoa" class="article-share-link">Share</a>
+      <a data-url="https://wubuze.github.io/2019/06/21/laravel-mongo/" data-id="cjx5k0yhk0002jc3wmwug0gai" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
-<nav id="article-nav">
-  
-  
-    <a href="/2019/06/21/laravel/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">laravel</div>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -157,14 +149,6 @@
         
           <li>
             <a href="/2019/06/21/laravel-mongo/">laravel &amp; mongo</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/21/laravel/">laravel</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/21/hello-world/">Hello World</a>
           </li>
         
       </ul>
