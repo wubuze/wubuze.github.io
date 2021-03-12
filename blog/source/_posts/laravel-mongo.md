@@ -4,30 +4,60 @@ date: 2019-06-21 11:21:53
 tags:
 ---
 
-# 标题一
-
-## 标题二
-
-### 标题三
-
-**这是加粗**
-
-*这是斜体*
-
-~~这是横线~~
-
-* 无序列表
-* 无序列表
-
-1. 有序列表
-2. 有序列表
+# 在 Laravel 中使用 MongoDB
 
 
-`内嵌代码` 
+**安装**
 
+* 推荐组件
 ```
-代码块
-
+composer require jenssegers/mongodb
 ```
 
-> 引用
+* 修改数据库配置文件 config/database.php 中
+```
+添加 MongoDB 的数据库的信息:
+'mongodb' => [    
+        'driver'   => 'mongodb',    
+        'host'     => 'localhost',    
+        'port'     => 27017,    
+        'database' => env('DB_CONNECTION', 'mongodb'),    
+        'username' => '',    
+        'password' => '',
+],
+
+
+```
+
+**使用**
+
+* 新增迁移
+
+```
+use Jenssegers\Mongodb\Schema\Blueprint;
+public function up()
+{
+    Schema::connection('mongo')->create('product', function (Blueprint $collection) {
+        $collection->string('name');
+        $collection->string('mfn')->unique();
+    });
+}
+
+```
+
+* model 
+
+```
+Jenssegers\Mongodb\Eloquent\Model
+
+class MongoModel extends Model
+{
+    protected $connection = 'mongo';
+
+    protected $collection = 'product';
+
+    public $timestamps = false;
+
+}
+
+```
